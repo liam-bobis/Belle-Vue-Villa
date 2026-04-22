@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belle Vue Villa</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="Photos/BVV-favicon.png">
+</head>
+<body class="home-page">
+
+  <header class="site-header home-header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="Photos/BVV-Logo.png" alt="Belle Vue Villa Logo" class="logo">
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation">☰</button>
+
+    <nav id="site-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="booking.html" class="book-link">Book Now</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Belle Vue Villa</h1>
+      <p>A private villa stay near Naga City for restful weekends, family gatherings, and quiet getaways.</p>
+      <button class="btn" type="button" onclick="location.href='booking.html'">Book Your Stay</button>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="section-heading">
+      <h2>About Belle Vue Villa</h2>
+      <p>
+        Belle Vue Villa is a peaceful private stay just outside the busy city center, giving guests a more relaxed setting while still being within convenient reach of Naga City. It is ideal for staycations, small gatherings, and slow weekends with family or friends.
+      </p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <h3>Peaceful Atmosphere</h3>
+        <p>Enjoy a calm setting that offers a refreshing break from the usual city pace.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Comfortable Stay</h3>
+        <p>Relax in a cozy villa space designed for simple, private, and memorable stays.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Private Plunge Pool</h3>
+        <p>Cool down and unwind in a private outdoor pool area perfect for casual lounging.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="location-section">
+    <div class="location-text">
+      <h2>Location</h2>
+      <p>
+        Belle Vue Villa is located near Naga City, Camarines Sur, offering a quieter setting while still being accessible to the city proper and nearby destinations.
+      </p>
+      <p class="relative-address">
+        <strong>Relative Address:</strong> Near Naga City, Camarines Sur, with convenient access to major roads, dining areas, and the city center.
+      </p>
+    </div>
+
+    <div class="location-image">
+      <img src="Photos/Outdoor/OD-1.JPG" alt="Belle Vue Villa exterior">
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready for a Relaxing Getaway?</h2>
+    <p>Check available dates and send your booking request in just a few steps.</p>
+    <button class="btn" type="button" onclick="location.href='booking.html'">Check Availability</button>
+  </section>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const siteNav = document.getElementById("site-nav");
+
+    menuToggle.addEventListener("click", () => {
+      siteNav.classList.toggle("show");
+    });
+  </script>
+</body>
+</html>

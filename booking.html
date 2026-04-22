@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belle Vue Villa | Booking</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="Photos/BVV-favicon.png">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="Photos/BVV-Logo.png" alt="Belle Vue Villa Logo" class="logo">
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation">☰</button>
+
+    <nav id="site-nav">
+      <a href="index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="booking.html" class="active">Booking</a>
+    </nav>
+  </header>
+
+  <main class="booking-page">
+
+    <section class="booking-hero">
+      <div class="booking-hero-text">
+        <h1>Book Your Stay at Belle Vue Villa</h1>
+        <p>
+          Check available dates, review the stay rates and payment details, then complete the booking form below.
+        </p>
+      </div>
+    </section>
+
+    <section class="booking-calendar-section">
+      <div class="calendar-card">
+        <div class="section-title-wrap">
+          <h2>Check Availability</h2>
+          <p>Please review unavailable dates before sending your booking request.</p>
+        </div>
+
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=2fcd3f3f1c48f18f8a14f2fc7dd975128a5dbd4f3025e5abf09b781caf058020%40group.calendar.google.com&ctz=Asia%2FManila"
+          title="Belle Vue Villa Availability Calendar">
+        </iframe>
+      </div>
+    </section>
+
+    <section class="booking-info-grid">
+      <div class="info-card rates-card">
+        <div class="section-title-wrap">
+          <h2>Stay Rates</h2>
+          <p>Please review the current rates before submitting your booking request.</p>
+        </div>
+        <img src="Photos/BVV-Summer-2026-Promo.png" alt="Belle Vue Villa stay rates">
+      </div>
+
+      <div class="info-card payment-card">
+        <div class="section-title-wrap">
+          <h2>Payment Details</h2>
+          <p>Please use the payment details shown below, then upload your proof of payment in the booking form.</p>
+        </div>
+        <img src="Photos/BVV-Payment-Details.png" alt="Belle Vue Villa payment details">
+      </div>
+    </section>
+
+    <section class="booking-form-section">
+      <div class="booking-form-card">
+        <div class="section-title-wrap">
+          <h2>Booking Form</h2>
+          <p>
+            Please complete the required fields accurately. After submitting your request, wait for your booking confirmation.
+          </p>
+        </div>
+
+        <form id="bookingForm">
+          <div class="input-grid">
+
+            <div class="input-group input-full">
+              <label class="required" for="guestnames">Guest Name(s)</label>
+              <input type="text" id="guestnames" name="guestnames" placeholder="Enter guest name(s)" required>
+            </div>
+
+            <div class="input-group">
+              <label class="required" for="contactNumber">Contact Number</label>
+              <input type="number" id="contactNumber" name="contactNumber" placeholder="Enter your contact number" required>
+            </div>
+
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email address">
+            </div>
+
+            <div class="input-group">
+              <label class="required" for="staydate">Preferred Stay Date</label>
+              <input type="date" id="staydate" name="staydate" required>
+            </div>
+
+            <div class="input-group">
+              <label class="required" for="staypackage">Stay Package of Choice</label>
+              <select id="staypackage" name="staypackage" required>
+                <option value="">Select a stay package</option>
+                <option value="Day Stay">Day Stay</option>
+                <option value="Overnight Stay">Overnight Stay</option>
+                <option value="Extended Stay">Extended Stay</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label class="required" for="numberofguests">Number of Guests</label>
+              <input type="number" id="numberofguests" name="numberofguests" placeholder="Enter number of guests" required>
+            </div>
+
+            <div class="input-group input-full">
+              <label class="required" for="paymentProof">Upload Proof of Payment</label>
+              <input type="file" id="paymentProof" hidden>
+
+              <div class="upload-box" id="uploadBox">
+                Click to upload proof of payment
+              </div>
+
+              <div id="filePreview" class="file-preview" style="display:none;">
+                <span id="fileName"></span>
+                <button id="removeFile" class="remove-btn" type="button">&times;</button>
+              </div>
+            </div>
+
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Booking Request</button>
+        </form>
+
+        <div id="successMessage" class="success-message" style="display:none;">
+          ✅ Booking submitted successfully.<br>
+          Please wait for your booking confirmation. We will contact you shortly.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loader-box">
+      <div class="spinner"></div>
+      <p>Submitting your booking... Please wait</p>
+    </div>
+  </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const bookingForm = document.getElementById("bookingForm");
+  const fileInput = document.getElementById("paymentProof");
+  const filePreview = document.getElementById("filePreview");
+  const fileName = document.getElementById("fileName");
+  const removeBtn = document.getElementById("removeFile");
+  const uploadBox = document.getElementById("uploadBox");
+  const dateInput = document.getElementById("staydate");
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  const submitBtn = document.getElementById("submitBtn");
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const siteNav = document.getElementById("site-nav");
+
+  /* ================= MOBILE MENU ================= */
+  if (menuToggle && siteNav) {
+    menuToggle.addEventListener("click", () => {
+      siteNav.classList.toggle("show");
+    });
+  }
+
+  /* ================= DATE PICKER CLICK ANYWHERE ================= */
+  if (dateInput) {
+    dateInput.addEventListener("click", function () {
+      if (this.showPicker) {
+        this.showPicker();
+      }
+    });
+  }
+
+  /* ================= FILE UPLOADER ================= */
+  if (uploadBox && fileInput) {
+    uploadBox.addEventListener("click", function () {
+      fileInput.click();
+    });
+  }
+
+  if (fileInput) {
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files.length > 0) {
+        fileName.textContent = fileInput.files[0].name;
+        filePreview.style.display = "flex";
+        uploadBox.style.display = "none";
+      }
+    });
+  }
+
+  if (removeBtn) {
+    removeBtn.addEventListener("click", function () {
+      fileInput.value = "";
+      filePreview.style.display = "none";
+      uploadBox.style.display = "flex";
+    });
+  }
+
+  /* ================= REMOVE ERROR STYLE ON INPUT ================= */
+  document.querySelectorAll(".booking-form-card input, .booking-form-card select").forEach(input => {
+    input.addEventListener("input", () => input.classList.remove("error"));
+    input.addEventListener("change", () => input.classList.remove("error"));
+  });
+
+  /* ================= FORM SUBMIT ================= */
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const requiredFields = [
+        "guestnames",
+        "contactNumber",
+        "staydate",
+        "staypackage",
+        "numberofguests"
+      ];
+
+      for (const name of requiredFields) {
+        const input = form.querySelector(`[name="${name}"]`);
+        if (!input || !input.value) {
+          input.classList.add("error");
+          input.focus();
+          alert("Please fill in all required fields.");
+          return;
+        }
+      }
+
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please upload your proof of payment.");
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = async function () {
+        try {
+          if (submitBtn) submitBtn.disabled = true;
+          if (loadingOverlay) loadingOverlay.classList.add("show");
+
+          const base64Data = reader.result.split(",")[1];
+          const formData = new URLSearchParams();
+
+          formData.append("guestnames", form.guestnames.value);
+          formData.append("contactNumber", form.contactNumber.value);
+          formData.append("email", form.email.value);
+          formData.append("staydate", form.staydate.value);
+          formData.append("staypackage", form.staypackage.value);
+          formData.append("numberofguests", form.numberofguests.value);
+
+          formData.append("file", base64Data);
+          formData.append("fileName", file.name);
+          formData.append("contentType", file.type);
+
+          const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbx-0HpkAIzjOSd7ai-jC_y5PNa8M-pzK0NLWvda2JExNiYYCEV-nDALwz4yRFVnlCgDkg/exec",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              body: formData.toString()
+            }
+          );
+
+          const rawText = await response.text();
+          console.log("Server response:", rawText);
+
+          let result;
+          try {
+            result = JSON.parse(rawText);
+          } catch {
+            throw new Error("Invalid server response: " + rawText);
+          }
+
+          if (loadingOverlay) loadingOverlay.classList.remove("show");
+          if (submitBtn) submitBtn.disabled = false;
+
+          if (result.status === "success") {
+            const successMessage = document.getElementById("successMessage");
+            if (successMessage) successMessage.style.display = "block";
+
+            bookingForm.reset();
+            filePreview.style.display = "none";
+            uploadBox.style.display = "flex";
+            fileInput.value = "";
+          } else {
+            throw new Error(result.message || "Unknown server error.");
+          }
+
+        } catch (error) {
+          if (loadingOverlay) loadingOverlay.classList.remove("show");
+          if (submitBtn) submitBtn.disabled = false;
+
+          console.error("Submission error:", error);
+          alert("Submission failed: " + error.message);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+});
+</script>
+
+  <div id="loadingOverlay" class="loading-overlay">
+  <div class="loader-box">
+    <div class="spinner"></div>
+    <p>Submitting your booking... Please wait</p>
+  </div>
+</div>
+
+</body>
+</html>
