@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belle Vue Villa</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="Photos/BVV-favicon.png">
+</head>
+<body class="home-page">
+ 
+  <header class="site-header home-header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="Photos/BVV_Transparent_BG_Logo.svg" alt="Belle Vue Villa Logo" class="logo">
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation">☰</button>
+
+    <nav id="site-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="#contact">Contact</a>
+      <a href="booking.html" class="book-link">Book Now</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Belle Vue Villa</h1>
+      <p>A one-bedroom holiday villa near Naga City with a plunge pool, lush garden surroundings, and a peaceful setting for exclusive stays.</p>
+      <button class="btn" type="button" onclick="location.href='booking.html'">Book Your Stay</button>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="section-heading">
+      <h2>About Belle Vue Villa</h2>
+      <p>
+        Belle Vue Villa is an entire private property designed for guests who want a calm, exclusive, and comfortable stay. This one-bedroom holiday villa offers a relaxing escape with a plunge pool, unlimited internet with WiFi, and a covered and tiled deck where guests can unwind in a quiet outdoor setting.
+      </p>
+    </div>
+
+  <section class="experience-section">
+    <div class="section-heading">
+      <h2>Your Stay Experience</h2>
+      <p>A private villa designed for slow mornings, quiet afternoons, and relaxed evenings.</p>
+    </div>
+
+    <div class="experience-grid">
+
+      <div class="experience-card">
+        <img src="Photos/Outdoor/OD-1.JPG" alt="Villa exterior">
+        <h3>Entire Private Property</h3>
+        <p>Enjoy full access to the villa with no shared spaces, giving you complete privacy throughout your stay.</p>
+      </div>
+
+      <div class="experience-card">
+        <img src="Photos/Outdoor/OD-4.JPG" alt="Plunge pool">
+        <h3>Private Plunge Pool</h3>
+        <p>Cool down and unwind in your own plunge pool, perfect for relaxed afternoons and evening dips.</p>
+      </div>
+
+      <div class="experience-card">
+        <img src="Photos/Outdoor/OD-3.JPG" alt="Garden">
+        <h3>Lush Garden Setting</h3>
+        <p>Surrounded by greenery, the villa offers a peaceful environment away from the city noise.</p>
+      </div>
+
+      <div class="experience-card">
+        <img src="Photos/Living Room/LR-3.JPG" alt="Interior">
+        <h3>Comfortable Living Space</h3>
+        <p>A one-bedroom villa thoughtfully designed for comfort, simplicity, and restful stays.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="location-section">
+    <div class="location-text">
+      <h2>Location</h2>
+      <p>
+        Belle Vue Villa is located near Naga City, Camarines Sur, offering a quieter setting while still being accessible to the city proper and nearby destinations.
+      </p>
+      <p class="relative-address">
+        <strong>Relative Address:</strong> Near Naga City, Camarines Sur, with convenient access to major roads, dining areas, and the city center.
+      </p>
+    </div>
+
+    <div class="location-image">
+      <img src="Photos/Outdoor/OD-1.JPG" alt="Belle Vue Villa exterior">
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready for a Relaxing Getaway?</h2>
+    <p>Check available dates and send your booking request in just a few steps.</p>
+    <button class="btn" type="button" onclick="location.href='booking.html'">Check Availability</button>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="contact-card">
+      <div class="section-heading">
+        <h2>Contact Us</h2>
+        <p>For inquiries, availability, and booking concerns, reach out through the details below.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h3>Contact Numbers</h3>
+          <h4>Concerns/Inquiries:</h4>
+          <p>Belle Vue Villa Facebook Page</p>
+          <h4>Concerns during Your Stay:</h4>
+          <p>09627740360</p>
+        </div>
+
+        <div class="contact-item">
+          <h3>Email</h3>
+          <p>bellevuevilla2025@gmail.com</p>
+        </div>
+
+        <div class="contact-item">
+          <h3>Location</h3>
+          <p>At Magarao, Camarines Sur. Near San Felipe, Naga City</p>
+        </div>
+
+        <div class="contact-item">
+          <h3>Availability</h3>
+          <p>Please use the booking page calendar to review open dates before sending your request.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const siteNav = document.getElementById("site-nav");
+
+    menuToggle.addEventListener("click", () => {
+      siteNav.classList.toggle("show");
+    });
+  </script>
+</body>
+</html>
