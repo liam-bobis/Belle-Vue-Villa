@@ -1,10 +1,4 @@
 /* =========================================================
-   BELLE VUE VILLA - COMPLETE STYLESHEET
-   DESKTOP / TABLET / MOBILE GROUPED WITH CLEAR LABELS
-   ========================================================= */
-
-
-/* =========================================================
    1. RESET / BASE
    ========================================================= */
 
@@ -109,7 +103,7 @@ textarea{
   position:relative;
   z-index:100;
   background:#ffffff;
-  border-bottom:1px solid rgba(0,0,0,0.06);
+  border-bottom:1px solid var(--border-soft);
 }
 
 .home-header{
@@ -239,7 +233,7 @@ textarea{
   padding:88px 24px;
 }
 
-/* ---------- EXPERIENCE SECTION (REPLACES STAY RATES ON HOME) ---------- */
+/* ---------- EXPERIENCE SECTION ---------- */
 
 .experience-section{
   background:#fff;
@@ -383,8 +377,6 @@ textarea{
    5. EXPLORE PAGE
    ========================================================= */
 
-/* ---------- EXPLORE HERO ---------- */
-
 .explore-more{
   min-height:78vh;
   padding:150px 24px 70px;
@@ -395,7 +387,7 @@ textarea{
   text-align:center;
   background:
     linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.30)),
-    url("Photos/BVV_Explore_Hero.jpg") center/cover no-repeat;
+    url("Photos/Outdoor/OD-1.JPG") center/cover no-repeat;
   color:white;
 }
 
@@ -411,8 +403,6 @@ textarea{
   color:rgba(255,255,255,0.94);
   max-width:700px;
 }
-
-/* ---------- ROOM SECTIONS ---------- */
 
 .room-section{
   max-width:1200px;
@@ -453,8 +443,6 @@ textarea{
   order:-1;
 }
 
-/* ---------- ROOM GALLERY ---------- */
-
 .room-gallery{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
@@ -489,8 +477,6 @@ textarea{
 .room-section + .room-section{
   border-top:1px solid var(--border-soft);
 }
-
-/* ---------- EXTRA GALLERY ---------- */
 
 .gallery-container{
   max-width:1200px;
@@ -530,8 +516,6 @@ textarea{
   height:320px;
 }
 
-/* ---------- LIGHTBOX ---------- */
-
 .lightbox{
   position:fixed;
   inset:0;
@@ -565,15 +549,58 @@ textarea{
    6. BOOKING PAGE
    ========================================================= */
 
-/* ---------- PAGE WRAPPER ---------- */
+/* ---------- BOOKING HERO IMAGE WITH FLOATING TABS ---------- */
+
+.booking-page-layout{
+  background:#f7f4ef;
+}
+
+.booking-top-hero{
+  position:relative;
+  min-height:62vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:140px 24px 70px;
+  background:url("Photos/3.JPG") center/cover no-repeat;
+}
+
+.booking-top-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.30));
+}
+
+.booking-top-text{
+  position:relative;
+  z-index:2;
+  color:#fff;
+  max-width:760px;
+}
+
+.booking-top-text h1{
+  font-size:54px;
+  line-height:1.1;
+  margin-bottom:12px;
+}
+
+.booking-top-text p{
+  font-size:18px;
+  color:rgba(255,255,255,0.92);
+}
+
+/* ---------- BOOKING CONTENT WRAPPER ---------- */
 
 .booking-page{
   max-width:1200px;
-  margin:0 auto;
+  margin:-40px auto 0;
   padding:36px 24px 80px;
+  position:relative;
+  z-index:3;
 }
 
-/* ---------- HERO ---------- */
+/* ---------- HERO CARD ---------- */
 
 .booking-hero{
   margin-bottom:28px;
@@ -665,7 +692,7 @@ textarea{
   object-fit:cover;
 }
 
-/* ---------- FORM CARD ---------- */
+/* ---------- FORM ---------- */
 
 .booking-form-section{
   margin-bottom:20px;
@@ -705,8 +732,6 @@ textarea{
   margin-bottom:8px;
 }
 
-/* ---------- INPUTS ---------- */
-
 .booking-form-card input,
 .booking-form-card select{
   width:100%;
@@ -738,7 +763,7 @@ textarea{
   box-shadow:0 0 0 4px rgba(217,83,79,0.10);
 }
 
-/* ---------- DATE PICKER CLICK ANYWHERE ---------- */
+/* ---------- DATE INPUTS ---------- */
 
 .booking-form-card input[type="date"]{
   cursor:pointer;
@@ -842,7 +867,7 @@ textarea{
   transform:none;
 }
 
-/* ---------- SUCCESS MESSAGE ---------- */
+/* ---------- SUCCESS ---------- */
 
 .success-message{
   margin-top:18px;
@@ -865,7 +890,7 @@ textarea{
 
 
 /* =========================================================
-   7. BOOKING LOADING / WAITING ANIMATION
+   7. LOADING / WAITING ANIMATION
    ========================================================= */
 
 .loading-overlay{
@@ -940,8 +965,7 @@ textarea{
 
 
 /* =========================================================
-   8. MOBILE / TABLET CSS - 900PX
-   LABEL: MOBILE/TABLET LARGE
+   8. MOBILE / TABLET LARGE
    ========================================================= */
 
 @media (max-width: 900px){
@@ -1000,8 +1024,7 @@ textarea{
 
 
 /* =========================================================
-   9. MOBILE CSS - 768PX
-   LABEL: MOBILE / TABLET MEDIUM
+   9. MOBILE / TABLET MEDIUM
    ========================================================= */
 
 @media (max-width: 768px){
@@ -1146,7 +1169,21 @@ textarea{
     padding:10px 20px 70px;
   }
 
+  .booking-top-hero{
+    min-height:50vh;
+    padding:120px 20px 50px;
+  }
+
+  .booking-top-text h1{
+    font-size:38px;
+  }
+
+  .booking-top-text p{
+    font-size:16px;
+  }
+
   .booking-page{
+    margin-top:-24px;
     padding:24px 16px 60px;
   }
 
@@ -1186,8 +1223,7 @@ textarea{
 
 
 /* =========================================================
-   10. MOBILE CSS - 480PX
-   LABEL: MOBILE SMALL
+   10. MOBILE SMALL
    ========================================================= */
 
 @media (max-width: 480px){
@@ -1201,6 +1237,10 @@ textarea{
 
   .explore-more h1{
     font-size:34px;
+  }
+
+  .booking-top-text h1{
+    font-size:32px;
   }
 
   .room-gallery{
