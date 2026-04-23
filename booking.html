@@ -12,7 +12,7 @@
   <header class="site-header">
     <div class="header-left">
       <a href="index.html">
-        <img src="Photos/BVV-Logo.png" alt="Belle Vue Villa Logo" class="logo">
+        <img src="Photos/BVV_Transparent_BG_Logo.svg" alt="Belle Vue Villa Logo" class="logo">
       </a>
     </div>
 
@@ -21,6 +21,7 @@
     <nav id="site-nav">
       <a href="index.html">Home</a>
       <a href="explore.html">Explore</a>
+      <a href="index.html#contact">Contact</a>
       <a href="booking.html" class="active">Booking</a>
     </nav>
   </header>
@@ -101,6 +102,16 @@
             </div>
 
             <div class="input-group">
+              <label for="staydate2">Alternative Date 1</label>
+              <input type="date" id="staydate2" name="staydate2">
+            </div>
+
+            <div class="input-group">
+              <label for="staydate3">Alternative Date 2</label>
+              <input type="date" id="staydate3" name="staydate3">
+            </div>
+
+            <div class="input-group">
               <label class="required" for="staypackage">Stay Package of Choice</label>
               <select id="staypackage" name="staypackage" required>
                 <option value="">Select a stay package</option>
@@ -131,7 +142,7 @@
 
           </div>
 
-          <button type="submit" class="submit-btn">Submit Booking Request</button>
+          <button type="submit" class="submit-btn" id="submitBtn">Submit Booking Request</button>
         </form>
 
         <div id="successMessage" class="success-message" style="display:none;">
@@ -149,176 +160,177 @@
     </div>
   </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const bookingForm = document.getElementById("bookingForm");
-  const fileInput = document.getElementById("paymentProof");
-  const filePreview = document.getElementById("filePreview");
-  const fileName = document.getElementById("fileName");
-  const removeBtn = document.getElementById("removeFile");
-  const uploadBox = document.getElementById("uploadBox");
-  const dateInput = document.getElementById("staydate");
-  const loadingOverlay = document.getElementById("loadingOverlay");
-  const submitBtn = document.getElementById("submitBtn");
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const bookingForm = document.getElementById("bookingForm");
+      const fileInput = document.getElementById("paymentProof");
+      const filePreview = document.getElementById("filePreview");
+      const fileName = document.getElementById("fileName");
+      const removeBtn = document.getElementById("removeFile");
+      const uploadBox = document.getElementById("uploadBox");
+      const loadingOverlay = document.getElementById("loadingOverlay");
+      const submitBtn = document.getElementById("submitBtn");
 
-  const menuToggle = document.getElementById("menu-toggle");
-  const siteNav = document.getElementById("site-nav");
+      const menuToggle = document.getElementById("menu-toggle");
+      const siteNav = document.getElementById("site-nav");
 
-  /* ================= MOBILE MENU ================= */
-  if (menuToggle && siteNav) {
-    menuToggle.addEventListener("click", () => {
-      siteNav.classList.toggle("show");
-    });
-  }
-
-  /* ================= DATE PICKER CLICK ANYWHERE ================= */
-  if (dateInput) {
-    dateInput.addEventListener("click", function () {
-      if (this.showPicker) {
-        this.showPicker();
-      }
-    });
-  }
-
-  /* ================= FILE UPLOADER ================= */
-  if (uploadBox && fileInput) {
-    uploadBox.addEventListener("click", function () {
-      fileInput.click();
-    });
-  }
-
-  if (fileInput) {
-    fileInput.addEventListener("change", function () {
-      if (fileInput.files.length > 0) {
-        fileName.textContent = fileInput.files[0].name;
-        filePreview.style.display = "flex";
-        uploadBox.style.display = "none";
-      }
-    });
-  }
-
-  if (removeBtn) {
-    removeBtn.addEventListener("click", function () {
-      fileInput.value = "";
-      filePreview.style.display = "none";
-      uploadBox.style.display = "flex";
-    });
-  }
-
-  /* ================= REMOVE ERROR STYLE ON INPUT ================= */
-  document.querySelectorAll(".booking-form-card input, .booking-form-card select").forEach(input => {
-    input.addEventListener("input", () => input.classList.remove("error"));
-    input.addEventListener("change", () => input.classList.remove("error"));
-  });
-
-  /* ================= FORM SUBMIT ================= */
-  if (bookingForm) {
-    bookingForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const requiredFields = [
-        "guestnames",
-        "contactNumber",
-        "staydate",
-        "staypackage",
-        "numberofguests"
+      const dateInputs = [
+        document.getElementById("staydate"),
+        document.getElementById("staydate2"),
+        document.getElementById("staydate3")
       ];
 
-      for (const name of requiredFields) {
-        const input = form.querySelector(`[name="${name}"]`);
-        if (!input || !input.value) {
-          input.classList.add("error");
-          input.focus();
-          alert("Please fill in all required fields.");
-          return;
-        }
+      if (menuToggle && siteNav) {
+        menuToggle.addEventListener("click", function () {
+          siteNav.classList.toggle("show");
+        });
       }
 
-      const file = fileInput.files[0];
-      if (!file) {
-        alert("Please upload your proof of payment.");
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.onload = async function () {
-        try {
-          if (submitBtn) submitBtn.disabled = true;
-          if (loadingOverlay) loadingOverlay.classList.add("show");
-
-          const base64Data = reader.result.split(",")[1];
-          const formData = new URLSearchParams();
-
-          formData.append("guestnames", form.guestnames.value);
-          formData.append("contactNumber", form.contactNumber.value);
-          formData.append("email", form.email.value);
-          formData.append("staydate", form.staydate.value);
-          formData.append("staypackage", form.staypackage.value);
-          formData.append("numberofguests", form.numberofguests.value);
-
-          formData.append("file", base64Data);
-          formData.append("fileName", file.name);
-          formData.append("contentType", file.type);
-
-          const response = await fetch(
-            "https://script.google.com/macros/s/AKfycbx-0HpkAIzjOSd7ai-jC_y5PNa8M-pzK0NLWvda2JExNiYYCEV-nDALwz4yRFVnlCgDkg/exec",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              body: formData.toString()
+      dateInputs.forEach(function (input) {
+        if (input) {
+          input.addEventListener("click", function () {
+            if (this.showPicker) {
+              this.showPicker();
             }
-          );
-
-          const rawText = await response.text();
-          console.log("Server response:", rawText);
-
-          let result;
-          try {
-            result = JSON.parse(rawText);
-          } catch {
-            throw new Error("Invalid server response: " + rawText);
-          }
-
-          if (loadingOverlay) loadingOverlay.classList.remove("show");
-          if (submitBtn) submitBtn.disabled = false;
-
-          if (result.status === "success") {
-            const successMessage = document.getElementById("successMessage");
-            if (successMessage) successMessage.style.display = "block";
-
-            bookingForm.reset();
-            filePreview.style.display = "none";
-            uploadBox.style.display = "flex";
-            fileInput.value = "";
-          } else {
-            throw new Error(result.message || "Unknown server error.");
-          }
-
-        } catch (error) {
-          if (loadingOverlay) loadingOverlay.classList.remove("show");
-          if (submitBtn) submitBtn.disabled = false;
-
-          console.error("Submission error:", error);
-          alert("Submission failed: " + error.message);
+          });
         }
-      };
+      });
 
-      reader.readAsDataURL(file);
+      if (uploadBox && fileInput) {
+        uploadBox.addEventListener("click", function () {
+          fileInput.click();
+        });
+      }
+
+      if (fileInput) {
+        fileInput.addEventListener("change", function () {
+          if (fileInput.files.length > 0) {
+            fileName.textContent = fileInput.files[0].name;
+            filePreview.style.display = "flex";
+            uploadBox.style.display = "none";
+          }
+        });
+      }
+
+      if (removeBtn) {
+        removeBtn.addEventListener("click", function () {
+          fileInput.value = "";
+          filePreview.style.display = "none";
+          uploadBox.style.display = "flex";
+        });
+      }
+
+      document.querySelectorAll(".booking-form-card input, .booking-form-card select").forEach(function (input) {
+        input.addEventListener("input", function () {
+          input.classList.remove("error");
+        });
+        input.addEventListener("change", function () {
+          input.classList.remove("error");
+        });
+      });
+
+      if (bookingForm) {
+        bookingForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const form = e.target;
+          const requiredFields = [
+            "guestnames",
+            "contactNumber",
+            "staydate",
+            "staypackage",
+            "numberofguests"
+          ];
+
+          for (const name of requiredFields) {
+            const input = form.querySelector(`[name="${name}"]`);
+            if (!input || !input.value) {
+              input.classList.add("error");
+              input.focus();
+              alert("Please fill in all required fields.");
+              return;
+            }
+          }
+
+          const file = fileInput.files[0];
+          if (!file) {
+            alert("Please upload your proof of payment.");
+            return;
+          }
+
+          const reader = new FileReader();
+
+          reader.onload = async function () {
+            try {
+              if (submitBtn) submitBtn.disabled = true;
+              if (loadingOverlay) loadingOverlay.classList.add("show");
+
+              const base64Data = reader.result.split(",")[1];
+              const formData = new URLSearchParams();
+
+              formData.append("guestnames", form.guestnames.value);
+              formData.append("contactNumber", form.contactNumber.value);
+              formData.append("email", form.email.value);
+              formData.append("staydate", form.staydate.value);
+              formData.append("staydate2", form.staydate2.value);
+              formData.append("staydate3", form.staydate3.value);
+              formData.append("staypackage", form.staypackage.value);
+              formData.append("numberofguests", form.numberofguests.value);
+
+              formData.append("file", base64Data);
+              formData.append("fileName", file.name);
+              formData.append("contentType", file.type);
+
+              const response = await fetch(
+                "https://script.google.com/macros/s/AKfycbwuUxicknrR-2fDfcu0Lau_Qh_9XKYRad7M_Bw93xoNKPArbrES__6kNRnSwAnsfR5BGg/exec",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  body: formData.toString()
+                }
+              );
+
+              const rawText = await response.text();
+              console.log("Server response:", rawText);
+
+              let result;
+              try {
+                result = JSON.parse(rawText);
+              } catch {
+                throw new Error("Invalid server response: " + rawText);
+              }
+
+              if (loadingOverlay) loadingOverlay.classList.remove("show");
+              if (submitBtn) submitBtn.disabled = false;
+
+              if (result.status === "success") {
+                const successMessage = document.getElementById("successMessage");
+                if (successMessage) successMessage.style.display = "block";
+
+                bookingForm.reset();
+                filePreview.style.display = "none";
+                uploadBox.style.display = "flex";
+                fileInput.value = "";
+              } else {
+                throw new Error(result.message || "Unknown server error.");
+              }
+
+            } catch (error) {
+              if (loadingOverlay) loadingOverlay.classList.remove("show");
+              if (submitBtn) submitBtn.disabled = false;
+
+              console.error("Submission error:", error);
+              alert("Submission failed: " + error.message);
+            }
+          };
+
+          reader.readAsDataURL(file);
+        });
+      }
     });
-  }
-});
-</script>
-
-  <div id="loadingOverlay" class="loading-overlay">
-  <div class="loader-box">
-    <div class="spinner"></div>
-    <p>Submitting your booking... Please wait</p>
-  </div>
-</div>
+  </script>
 
 </body>
 </html>
