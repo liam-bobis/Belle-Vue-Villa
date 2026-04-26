@@ -1024,13 +1024,23 @@ textarea{
 
 
 /* =========================================================
-   9. MOBILE / TABLET MEDIUM
+   MOBILE / TABLET MEDIUM
+   Transparent mobile menu for hero pages
    ========================================================= */
 
 @media (max-width: 768px){
+
   .site-header{
     padding:16px 20px;
     position:relative;
+  }
+
+  .home-header{
+    position:absolute;
+    top:0;
+    left:0;
+    background:transparent;
+    border-bottom:none;
   }
 
   .logo{
@@ -1042,6 +1052,10 @@ textarea{
     z-index:30;
   }
 
+  .home-header .menu-toggle{
+    color:#fff;
+  }
+
   .site-header nav{
     position:absolute;
     top:100%;
@@ -1050,241 +1064,58 @@ textarea{
     display:none;
     flex-direction:column;
     align-items:stretch;
-    background:#ffffff;
     border-radius:14px;
-    box-shadow:0 12px 30px rgba(0,0,0,0.15);
     padding:12px;
     gap:8px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
   }
 
   .home-header nav{
-    background:rgba(255,255,255,0.96);
-    backdrop-filter:blur(8px);
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  }
+
+  .site-header:not(.home-header) nav{
+    background:#ffffff;
   }
 
   .site-header nav.show{
     display:flex;
   }
 
-  .site-header nav a,
   .home-header nav a{
+    color:#fff;
+    background:rgba(255,255,255,0.10);
+  }
+
+  .home-header nav a:hover{
+    background:rgba(255,255,255,0.20);
+    color:#fff;
+  }
+
+  .home-header nav a.active{
+    background:var(--brand-green);
+    color:#fff;
+  }
+
+  .site-header:not(.home-header) nav a{
     color:#333;
     background:transparent;
+  }
+
+  .site-header:not(.home-header) nav a.active{
+    background:var(--brand-green);
+    color:#fff;
+  }
+
+  .site-header nav a{
     padding:12px 14px;
     border-radius:10px;
   }
 
-  .site-header nav a.active{
-    color:#fff;
-    background:var(--brand-green);
-  }
-
   .book-link{
     text-align:center;
-  }
-
-  .hero{
-    min-height:88vh;
-    padding:130px 24px 60px;
-  }
-
-  .hero-text{
-    max-width:100%;
-    text-align:center;
-  }
-
-  .hero-text h1{
-    font-size:42px;
-  }
-
-  .hero-text p{
-    font-size:18px;
-  }
-
-  .about,
-  .experience-section,
-  .location-section,
-  .cta,
-  .contact-section{
-    padding:60px 20px;
-  }
-
-  .section-heading h2,
-  .location-text h2,
-  .cta h2,
-  .section-title-wrap h2{
-    font-size:24px;
-  }
-
-  .explore-more{
-    min-height:58vh;
-    padding:120px 20px 50px;
-  }
-
-  .explore-more h1{
-    font-size:40px;
-  }
-
-  .explore-more h4{
-    font-size:16px;
-  }
-
-  .room-section{
-    padding:56px 20px;
-  }
-
-  .room-text{
-    text-align:center;
-  }
-
-  .room-text h2{
-    font-size:30px;
-  }
-
-  .room-text p{
-    font-size:16px;
-  }
-
-  .room-gallery{
-    grid-template-columns:1fr;
-    grid-auto-rows:220px;
-  }
-
-  .room-gallery img:first-child{
-    grid-column:auto;
-    grid-row:auto;
-  }
-
-  .images{
-    grid-template-columns:1fr;
-  }
-
-  .images img,
-  .images img:first-child{
-    height:240px;
-    grid-column:auto;
-  }
-
-  .gallery-container{
-    padding:10px 20px 70px;
-  }
-
-  .booking-top-hero{
-    min-height:50vh;
-    padding:120px 20px 50px;
-  }
-
-  .booking-top-text h1{
-    font-size:38px;
-  }
-
-  .booking-top-text p{
-    font-size:16px;
-  }
-
-  .booking-page{
-    margin-top:-24px;
-    padding:24px 16px 60px;
-  }
-
-  .booking-hero-text,
-  .calendar-card,
-  .booking-page .info-card,
-  .booking-form-card,
-  .contact-card{
-    padding:20px;
-    border-radius:16px;
-  }
-
-  .booking-hero-text h1{
-    font-size:32px;
-  }
-
-  .input-grid{
-    grid-template-columns:1fr;
-  }
-
-  .input-full{
-    grid-column:auto;
-  }
-
-  .calendar-card iframe{
-    height:420px;
-  }
-
-  .experience-grid{
-    grid-template-columns:1fr;
-  }
-
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-
-/* =========================================================
-   10. MOBILE SMALL
-   ========================================================= */
-
-@media (max-width: 480px){
-  .hero-text h1{
-    font-size:34px;
-  }
-
-  .hero-text p{
-    font-size:16px;
-  }
-
-  .explore-more h1{
-    font-size:34px;
-  }
-
-  .booking-top-text h1{
-    font-size:32px;
-  }
-
-  .room-gallery{
-    grid-auto-rows:190px;
-  }
-
-  .images img,
-  .images img:first-child{
-    height:200px;
-  }
-
-  .lightbox .close{
-    top:12px;
-    right:18px;
-    font-size:34px;
-  }
-
-  .booking-hero-text h1{
-    font-size:28px;
-  }
-
-  .calendar-card iframe{
-    height:360px;
-  }
-
-  .upload-box{
-    min-height:100px;
-    font-size:14px;
-  }
-
-  .submit-btn{
-    min-width:180px;
-    padding:14px 22px;
-    font-size:15px;
-  }
-
-  .rates-card img,
-  .payment-card img{
-    max-height:260px;
-    object-fit:contain;
-  }
-
-  .loader-box{
-    padding:24px 20px;
-    width:88%;
   }
 }
