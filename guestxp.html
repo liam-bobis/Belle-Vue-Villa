@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belle Vue Villa | Guest Experiences</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="Photos/BVV-favicon.png">
+</head>
+<body class="explore-page">
+
+  <header class="site-header home-header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="Photos/BVV_Transparent_BG_Logo.svg" alt="Belle Vue Villa Logo" class="logo">
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation">☰</button>
+
+    <nav id="site-nav">
+      <a href="index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="guestxp.html" class="active">Guest Experiences</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="booking.html" class="book-link">Book Now</a>
+    </nav>
+  </header>
+
+  <section class="guest-xp">
+    <h1>Our Guests' Experiences</h1>
+    <h4>Photos, videos, and short testimonials from guests who enjoyed their stay.</h4>
+  </section>
+
+  <section class="gallery-container" style="padding-top:48px;">
+    <h2>Guests' Photo Memories</h2>
+    <div class="images guest-media-grid" id="guest-gallery">
+        <img src="Photos/Guest XP/guest-xp-1.jpg" alt="Guest photo 2" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-2.jpg" alt="Guest photo 3" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-3.jpg" alt="Guest photo 4" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-4.jpg" alt="Guest photo 5" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-5.jpg" alt="Guest photo 6" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-6.jpg" alt="Guest photo 7" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-7.jpg" alt="Guest photo 8" onclick="openMedia(this)">
+        <img src="Photos/Guest XP/guest-xp-8.jpg" alt="Guest photo 9" onclick="openMedia(this)">
+      </div>
+  </section>
+
+  <section class="gallery-container">
+    <h2>Guests' Video Memories</h2>
+    <div class="images guest-media-grid">
+      <div class="video-card">
+        <video muted playsinline preload="metadata" onclick="openMedia(this)">
+          <source src="Photos/Guest XP/guest-xp-vid-1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-play-icon">▶</div>
+      </div>
+      <div class="video-card">
+        <video muted playsinline preload="metadata" onclick="openMedia(this)">
+          <source src="Photos/Guest XP/guest-xp-vid-2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-play-icon">▶</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="lightbox" class="lightbox">
+    <span class="close" onclick="closeMedia()">&times;</span>
+    <img id="lightbox-img" alt="Expanded media">
+    <div id="video-wrap" style="display:none; width:100%; max-width:1100px;">
+      <video id="lightbox-video" controls style="width:100%; border-radius:12px;" controlsList="nodownload">
+        <source id="lightbox-video-src" src="" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const siteNav = document.getElementById("site-nav");
+
+    menuToggle.addEventListener("click", () => {
+      siteNav.classList.toggle("show");
+    });
+
+    function openMedia(el) {
+      const lightbox = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      const videoWrap = document.getElementById("video-wrap");
+      const video = document.getElementById("lightbox-video");
+      const videoSrc = document.getElementById("lightbox-video-src");
+
+      const type = el.dataset.type || (el.tagName.toLowerCase() === 'video' ? 'video' : 'image');
+
+      if (type === 'video') {
+        // try to find the source URL
+        let src = '';
+        if (el.tagName.toLowerCase() === 'video') {
+          const source = el.querySelector('source');
+          if (source) src = source.src;
+        } else if (el.dataset.src) {
+          src = el.dataset.src;
+        }
+        if (!src) {
+          alert('No video file found.');
+          return;
+        }
+        img.style.display = 'none';
+        videoWrap.style.display = 'block';
+        videoSrc.src = src;
+        video.load();
+        setTimeout(()=> video.play().catch(()=>{}), 100);
+        lightbox.style.display = 'flex';
+      } else {
+        video.pause && video.pause();
+        videoWrap.style.display = 'none';
+        img.style.display = 'block';
+        img.src = el.src || el.dataset.src;
+        img.alt = el.alt || 'Expanded image';
+        lightbox.style.display = 'flex';
+      }
+    }
+
+    function closeMedia() {
+      const lightbox = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      const videoWrap = document.getElementById("video-wrap");
+      const video = document.getElementById("lightbox-video");
+      const videoSrc = document.getElementById("lightbox-video-src");
+
+      lightbox.style.display = 'none';
+      img.src = '';
+      video.pause && video.pause();
+      videoSrc.src = '';
+      video.load && video.load();
+      videoWrap.style.display = 'none';
+    }
+
+    document.getElementById("lightbox").addEventListener("click", function (e) {
+      if (e.target === this) {
+        closeMedia();
+      }
+    });
+  </script>
+</body>
+</html>
