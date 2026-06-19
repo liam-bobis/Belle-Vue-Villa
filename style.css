@@ -10,17 +10,31 @@
 }
 
 :root{
-  --brand-green:#5f7f67;
-  --brand-green-dark:#4f6d56;
-  --brand-green-soft:#edf3ee;
-  --brand-terracotta:#b85c4a;
-  --brand-terracotta-dark:#9f4d3d;
-  --brand-sand:#efe6dc;
-  --text-main:#1f1f1f;
-  --text-soft:#666;
-  --card-white:#ffffff;
+
+  /* Belle Vue Villa Theme */
+
+  --brand-green:#6D8A63;
+  --brand-green-dark:#556B4F;
+  --brand-green-soft:#EEF3EC;
+
+  /* Bougainvillea Accent */
+  --brand-terracotta:#C54874;
+  --brand-terracotta-dark:#A9365F;
+
+  /* Warm Villa Colors */
+  --brand-sand:#F6F1EA;
+  --text-main:#232323;
+  --text-soft:#646464;
+
+  /* Cards */
+  --card-white:#FFFCF8;
+
+  /* Borders */
   --border-soft:rgba(0,0,0,0.06);
-  --shadow-soft:0 10px 26px rgba(0,0,0,0.08);
+
+  /* Shadows */
+  --shadow-soft:0 12px 28px rgba(0,0,0,0.08);
+
 }
 
 html{
@@ -28,7 +42,13 @@ html{
 }
 
 body{
-  background:#f7f4ef;
+  background:
+    linear-gradient(
+      180deg,
+      #FCFAF7 0%,
+      #F7F2EB 45%,
+      #F1ECE4 100%
+    );
   color:var(--text-main);
   line-height:1.6;
 }
@@ -65,6 +85,16 @@ textarea{
   line-height:1.2;
   margin-bottom:14px;
   color:var(--text-main);
+}
+
+.section-heading h2::after{
+  content:"";
+  display:block;
+  width:70px;
+  height:4px;
+  background:var(--brand-terracotta);
+  margin:14px auto 0;
+  border-radius:999px;
 }
 
 .section-heading p{
@@ -140,13 +170,15 @@ textarea{
 }
 
 .site-header nav a:hover{
-  background:var(--brand-green-soft);
+  background:#E8F0E5;
   color:var(--brand-green-dark);
+  transform:translateY(-2px);
 }
 
 .site-header nav a.active{
   background:var(--brand-green);
   color:#fff;
+  box-shadow:0 6px 18px rgba(109,138,99,0.30);
 }
 
 .home-header nav a{
@@ -163,6 +195,7 @@ textarea{
 .book-link{
   background:var(--brand-terracotta) !important;
   color:#fff !important;
+  box-shadow:0 8px 18px rgba(197,72,116,0.28);
 }
 
 .book-link:hover{
@@ -201,7 +234,11 @@ textarea{
 .hero-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(to right, rgba(0,0,0,0.58), rgba(0,0,0,0.18));
+  background:linear-gradient(
+    to right,
+    rgba(18,22,18,0.65),
+    rgba(18,22,18,0.30)
+  );
 }
 
 .hero-text{
@@ -233,6 +270,18 @@ textarea{
   padding:88px 24px;
 }
 
+.contact-section{
+  background:#FCFAF7;
+}
+
+.about{
+  background:
+    linear-gradient(
+      180deg,
+      #FCFAF7,
+      #F8F4EE
+    );
+}
 /* ---------- EXPERIENCE SECTION ---------- */
 
 .experience-section{
@@ -248,11 +297,10 @@ textarea{
 }
 
 .experience-card{
-  background:#f8f6f1;
-  border-radius:18px;
+  background:#FFFCF8;
+  border:1px solid rgba(0,0,0,.05);
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 10px 26px rgba(0,0,0,0.06);
-  transition:0.3s ease;
 }
 
 .experience-card:hover{
@@ -321,7 +369,12 @@ textarea{
 
 .cta{
   text-align:center;
-  background:var(--brand-sand);
+  background:
+    linear-gradient(
+      135deg,
+      #F1E8DC,
+      #E7D9C8
+    );
 }
 
 .cta h2{
@@ -338,26 +391,27 @@ textarea{
 
 /* ---------- CONTACT ---------- */
 
-.contact-card{
+.contact-card {
   max-width:1200px;
   margin:0 auto;
-  background:#ffffff;
+  background:var(--card-white);
   border:1px solid var(--border-soft);
   border-radius:22px;
   box-shadow:0 10px 26px rgba(0,0,0,0.06);
   padding:38px 30px;
 }
 
-.contact-grid{
+.contact-grid {
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:20px;
 }
 
 .contact-item{
-  background:#f8f6f1;
+  background:#FFFCF8;
   border-radius:16px;
-  padding:22px 18px;
+  padding:22px;
+  border:1px solid rgba(0,0,0,.05);
 }
 
 .contact-item h3{
@@ -583,6 +637,11 @@ textarea{
   cursor:pointer;
 }
 
+/*Guest Experience*/
+.guest-experiences{
+  background:#FAF7F2;
+}
+
 
 /* =========================================================
    6. BOOKING PAGE
@@ -646,7 +705,7 @@ textarea{
 }
 
 .booking-hero-text{
-  background:#ffffff;
+  background:var(--card-white);
   border:1px solid var(--border-soft);
   border-radius:20px;
   box-shadow:0 10px 26px rgba(0,0,0,0.06);
@@ -691,7 +750,7 @@ textarea{
 }
 
 .calendar-card{
-  background:#ffffff;
+  background:var(--card-white);
   border:1px solid var(--border-soft);
   border-radius:20px;
   box-shadow:0 10px 26px rgba(0,0,0,0.06);
@@ -716,7 +775,7 @@ textarea{
 }
 
 .booking-page .info-card{
-  background:#ffffff;
+  background:var(--card-white);
   border:1px solid var(--border-soft);
   border-radius:20px;
   box-shadow:0 10px 26px rgba(0,0,0,0.06);
@@ -738,7 +797,7 @@ textarea{
 }
 
 .booking-form-card{
-  background:#ffffff;
+  background:var(--card-white);
   border:1px solid var(--border-soft);
   border-radius:20px;
   box-shadow:0 10px 26px rgba(0,0,0,0.06);
@@ -817,6 +876,13 @@ textarea{
   display:none !important;
 }
 
+.booking-top-overlay{
+  background:
+    linear-gradient(
+      rgba(20,25,20,.62),
+      rgba(20,25,20,.35)
+    );
+}
 /* ---------- FILE UPLOADER ---------- */
 
 .upload-box{
@@ -827,7 +893,7 @@ textarea{
   padding:18px;
   border:2px dashed #cfd7cf;
   border-radius:14px;
-  background:#f8fbf8;
+  background:#F7FAF5;
   color:#4d5c50;
   text-align:center;
   cursor:pointer;
@@ -892,7 +958,7 @@ textarea{
   font-weight:700;
   cursor:pointer;
   transition:background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow:0 10px 18px rgba(192,57,43,0.18);
+  box-shadow:0 12px 24px rgba(197,72,116,0.25);
 }
 
 .submit-btn:hover{
@@ -1186,4 +1252,28 @@ textarea{
   .book-link{
     text-align:center;
   }
+}
+/* =========================================================
+   PREMIUM CARD HOVER
+   ========================================================= */
+
+.experience-card,
+.contact-item,
+.info-card,
+.calendar-card,
+.booking-form-card{
+  transition:all .3s ease;
+}
+
+.experience-card:hover,
+.contact-item:hover,
+.info-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 36px rgba(0,0,0,.12);
+}
+
+.location-image img,
+.room-gallery img,
+.images img{
+  border:3px solid rgba(255,255,255,.8);
 }
